@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.programmercave.cinema.Model.Room;
 import com.programmercave.cinema.Model.Seat;
+import com.programmercave.cinema.Model.OrderedSeat;
+import com.programmercave.cinema.Model.Token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +46,18 @@ public class CinemaController {
             }
         }
         return new ResponseEntity<>(Map.of("error", "The ticket has been already purchased!"), HttpStatus.BAD_REQUEST);
+    }
+    
+    @PostMapping("/return")
+    public ResponseEntity<?> returnTicket(@RequestBody Token token) {
+        List<OrderedSeat> orderedSeats = room.getOrderedSeats();
+        for (OrderedSeat orderedSeat : orderedSeats) {
+            if (orderedSeat.getToken().equals(token.getToken())) {
+                orderedSeats.remove(orderedSeat);
+                room.getAvailableSeats().add(orderedSeat.getTicket());
+                return new ResponseEntity<>(Map.of("returned_ticket", orderedSeat.getTicket()), HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(Map.of("error", "Wrong token!"), HttpStatus.BAD_REQUEST);
     }
 }

@@ -10,11 +10,14 @@ public class Room {
 	private int totalColumns;
 	private List<Seat> availableSeats;
 	
+	@JsonIgnore
+    private List<OrderedSeat> orderedSeats;
 	
 	public Room(int totalRows, int totalColumns, List<Seat> availableSeats) {
         this.totalRows = totalRows;
         this.totalColumns = totalColumns;
         this.availableSeats = availableSeats;
+        this.orderedSeats = new ArrayList<>();
     }
 	
 	public static Room getAllSeats(int rows, int columns) {
@@ -26,7 +29,6 @@ public class Room {
         }
         return new Room(rows, columns, seats);
     }
-
 
     public int getTotalRows() {
         return totalRows;
@@ -50,5 +52,13 @@ public class Room {
 
     public void setAvailable_seats(List<Seat> availableSeats) {
         this.availableSeats = availableSeats;
+    }
+    
+    public List<OrderedSeat> getOrderedSeats() {
+        return orderedSeats;
+    }
+
+    public void setOrderedSeats(List<OrderedSeat> orderedSeats) {
+        this.orderedSeats = orderedSeats;
     }
 }
