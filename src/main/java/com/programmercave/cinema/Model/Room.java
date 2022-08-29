@@ -1,5 +1,7 @@
 package com.programmercave.cinema.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ public class Room {
 	private int totalRows;
 	private int totalColumns;
 	private List<Seat> availableSeats;
+	
 	
 	public Room(int totalRows, int totalColumns, List<Seat> availableSeats) {
         this.totalRows = totalRows;
