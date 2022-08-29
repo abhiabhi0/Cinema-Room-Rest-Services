@@ -14,7 +14,7 @@ public class Room {
         this.availableSeats = availableSeats;
     }
 	
-	public Room getAllSeats(int rows, int columns) {
+	public static Room getAllSeats(int rows, int columns) {
         List<Seat> seats = new ArrayList<>();
         for (int row = 1; row <= rows; row++) {
             for (int column = 1; column <= columns; column++) {
